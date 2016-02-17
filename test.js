@@ -387,22 +387,7 @@ SensorTag.discover(function(sensorTag) {
           callback();
         }
       },
-      function(callback) {
-        console.log('readSimpleRead - waiting for button press ...');
-        sensorTag.on('simpleKeyChange', function(left, right, reedRelay) {
-          console.log('left: ' + left);
-          console.log('right: ' + right);
-          if (sensorTag.type === 'cc2650') {
-            console.log('reed relay: ' + reedRelay);
-          }
-
-          if (left || right) {
-            sensorTag.notifySimpleKey(callback);
-          }
-        });
-
-        sensorTag.notifySimpleKey();
-      },
+      
       function(callback) {
         console.log('disconnect');
         sensorTag.disconnect(callback);
