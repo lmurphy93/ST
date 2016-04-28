@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LM-Project</title>
+
+<style type='text/css' rel='stylesheet'>
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#body {
+  width: 100%;
+  max-width: 1280px;
+  min-width: 980px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+#last-time {
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+#cols {
+  font-size: 0;
+}
+
+#left-col {
+  width: 25%;
+  display: inline-block;
+  height: 200px;
+  font-size : 12pt;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+#left-col button {
+  display: block;
+  border: none;
+  background: #4A70A8;
+  color: #FFF;
+  vertical-align: top;
+  font-size: 14pt;
+  width: 100%;
+  padding: 5px;
+  cursor: pointer;
+}
+#left-col button:hover {
+  background: #5F87B8;
+}
+
+#right-col {
+  width: 75%;
+  display: inline-block;
+  height: 200px;
+  font-size : 12pt;
+  vertical-align: top;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+table {
+  width: 100%;
+}
+th {
+  background: #000;
+  color: #FFF;
+  padding: 5px;
+  text-align: left;
+}
+td {
+  padding: 5px;
+}
+tr {
+  
+}
+tr:nth-child(even) {
+  background: #EEE;
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<div id="body">
+
+  <h1>Sensor Values</h1>
+
+  <div id="cols">
+    
+    <div id='left-col'>
+      
+      <button onclick="showData(this.value)" value="Device Name">Device Name</button>
+      <button onclick="showData(this.value)" value="SystemId">SystemID</button>
+      <button onclick="showData(this.value)" value="Device Temp">Device Temperature</button>
+      <button onclick="showData(this.value)" value="Ambient Temp">Ambient Temperature</button>
+      <button onclick="showData(this.value)" value="Accelerometer">Accelerometer</button>
+      <button onclick="showData(this.value)" value="Humidity">Humidity</button>
+      <button onclick="showData(this.value)" value="Magnetometer">Magnetometer</button>
+      <button onclick="showData(this.value)" value="Pressure">Pressure</button>
+      <button onclick="showData(this.value)" value="Gyroscope">Gyroscope</button>
+      <button onclick="showData(this.value)" value="Luxometer">Luxometer</button>
+      
+    </div>
+
+    <div id='right-col'>
+      <div id="data">
+      
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function showData(sensor) {
+  
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else { // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("data").innerHTML=xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("GET","data.php?q=" + sensor,true);
+  xmlhttp.send();
+}
+</script>
+
+</body>
+</html>
